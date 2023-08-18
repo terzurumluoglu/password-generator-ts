@@ -4,13 +4,12 @@ import { Char, Utils } from './services';
 const char = Char.get();
 const utils = Utils.get();
 
-export const generatePassword = (config: IPasswordConfig) => {
-  const { length, ...others } = config;
+const generatePassword = (length: number, config: IPasswordConfig) => {
   if (length < 4) {
     return new Error('length must be at least 4 characters');
   }
 
-  const keys = Object.entries(others)
+  const keys = Object.entries(config)
     .filter((ent) => ent[1])
     .map((ent) => ent[0]);
 
@@ -41,4 +40,4 @@ export const generatePassword = (config: IPasswordConfig) => {
   return utils.shuffle(passwordAsArray).join('');
 };
 
-export { IPasswordConfig };
+export { generatePassword, IPasswordConfig };
