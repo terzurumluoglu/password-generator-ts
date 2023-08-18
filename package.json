@@ -1,11 +1,11 @@
 {
   "name": "password-generator-ts",
-  "version": "1.0.5",
+  "version": "1.0.14",
   "description": "You can geenrate random password by using your selection",
   "main": "build/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc"
+    "build": "rm -rf build && tsc"
   },
   "repository": {
     "type": "git",
@@ -25,5 +25,11 @@
   "homepage": "https://github.com/terzurumluoglu/password-generator-ts#readme",
   "devDependencies": {
     "typescript": "^5.1.6"
-  }
+  },
+  "files": [
+    "build/**/*.js",
+    "build/**/*.d.ts",
+    "build/index.d.ts"
+  ],
+  "types":"build/index.d.ts"
 }
