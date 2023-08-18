@@ -40,3 +40,5 @@ export const generatePassword = (config: IPasswordConfig) => {
 
   return utils.shuffle(passwordAsArray).join('');
 };
+
+export { IPasswordConfig };
