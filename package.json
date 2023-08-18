@@ -1,0 +1,29 @@
+{
+  "name": "password-generator-ts",
+  "version": "1.0.1",
+  "description": "You can geenrate random password by using your selection",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/terzurumluoglu/password-generator-ts.git"
+  },
+  "keywords": [
+    "password",
+    "generate",
+    "create",
+    "random"
+  ],
+  "author": "Toprak ERZURUMLUOĞLU <toprakerzurumluoglu@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/terzurumluoglu/password-generator-ts/issues"
+  },
+  "homepage": "https://github.com/terzurumluoglu/password-generator-ts#readme",
+  "devDependencies": {
+    "typescript": "^5.1.6"
+  }
+}
