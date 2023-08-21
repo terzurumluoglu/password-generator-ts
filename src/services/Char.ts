@@ -1,7 +1,11 @@
+import { Utils } from './';
+
+const utils = Utils.get();
+
 export class Char {
     alphabetAsNumbers;
     constructor() {
-      this.alphabetAsNumbers = [...Array(26).keys()].map((_, i) => 10 + i);
+      this.alphabetAsNumbers = utils.generateEmptyArray(26).map((_, i) => 10 + i);
     }
   
     static #instance: Char;
@@ -14,7 +18,7 @@ export class Char {
     }
   
     get numbers(): string[] {
-      return [...Array(10).keys()].map((key) => JSON.stringify(key));
+      return utils.generateEmptyArray(10).map((key) => JSON.stringify(key));
     }
   
     get lowercases(): string[] {

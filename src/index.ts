@@ -31,7 +31,7 @@ const generatePassword = (length: number, config: IPasswordConfig) => {
   const len = length - keys.length;
 
   if (len > 0) {
-    [...Array(len).keys()].forEach((_) => {
+    utils.generateEmptyArray(len).forEach((_) => {
       const index = utils.generateRandomNumber(arrayWithSelectedProperties.length);
       passwordAsArray.push(arrayWithSelectedProperties[index]);
     });
