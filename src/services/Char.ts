@@ -1,4 +1,4 @@
-import { Utils } from './';
+import { Utils } from './Utils';
 
 const utils = Utils.get();
 
