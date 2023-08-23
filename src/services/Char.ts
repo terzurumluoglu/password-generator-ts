@@ -1,4 +1,4 @@
-import { Utils } from './';
+import { Utils } from './Utils';
 
 const utils = Utils.get();
 
@@ -30,7 +30,11 @@ export class Char {
     }
   
     get symbols(): string[] {
-      return ['^', '*', '!', '&', '$', '%', '#', '@'];
+      return [
+        '.', ',', ';', '?', '!', '=', '+', '%',
+        '(', ')', '[', ']', '{', '}', '<', '>',
+        '^', '*', '&', '$', '#', '@'
+      ];
     }
   }
   

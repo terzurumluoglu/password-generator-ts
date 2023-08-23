@@ -1,21 +1,21 @@
 import { IPasswordConfig } from './models/IPasswordConfig';
 import { Char, Utils } from './services';
+import { PasswordError } from "./helpers/PasswordError";
+import { validation } from './helpers/validation';
 
 const char = Char.get();
 const utils = Utils.get();
 
 const generatePassword = (length: number, config: IPasswordConfig) => {
-  if (length < 4) {
-    return new Error('length must be at least 4 characters');
+
+  const control = validation({ length, config });
+
+  if (!control.success) {
+    const { error: { code, message } } = control;
+    throw new PasswordError(code, message);
   }
 
-  const keys = Object.entries(config)
-    .filter((ent) => ent[1])
-    .map((ent) => ent[0]);
-
-  if (keys.length < 2) {
-    return new Error('You must select at least two option to generate password');
-  }
+  const keys = utils.getSelectedKeys(config);
 
   const passwordAsArray: string[] = [];
 
