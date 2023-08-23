@@ -14,7 +14,7 @@ npm install password-generator-ts --save
 import { generatePassword, IPasswordConfig } from "password-generator-ts";
 
 
-const length: number = 8   // should be at least 4
+const length: number = 8   // should be at least 6
 
 // You should set as true at least two options
 const config: IPasswordConfig = {
