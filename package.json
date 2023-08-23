@@ -1,6 +1,6 @@
 {
   "name": "password-generator-ts",
-  "version": "1.0.14",
+  "version": "1.0.17",
   "description": "You can geenrate random password by using your selection",
   "main": "build/index.js",
   "scripts": {
@@ -31,5 +31,5 @@
     "build/**/*.d.ts",
     "build/index.d.ts"
   ],
-  "types":"build/index.d.ts"
+  "types": "build/index.d.ts"
 }

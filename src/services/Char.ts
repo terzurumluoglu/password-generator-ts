@@ -3,9 +3,9 @@ import { Utils } from './';
 const utils = Utils.get();
 
 export class Char {
-    alphabetAsNumbers;
+    #alphabetAsNumbers;
     constructor() {
-      this.alphabetAsNumbers = utils.generateEmptyArray(26).map((_, i) => 10 + i);
+      this.#alphabetAsNumbers = utils.generateEmptyArray(26).map((_, i) => 10 + i);
     }
   
     static #instance: Char;
@@ -22,11 +22,11 @@ export class Char {
     }
   
     get lowercases(): string[] {
-      return this.alphabetAsNumbers.map((a) => a.toString(36));
+      return this.#alphabetAsNumbers.map((a) => a.toString(36));
     }
   
     get uppercases(): string[] {
-      return this.alphabetAsNumbers.map((a) => a.toString(36).toLocaleUpperCase());
+      return this.#alphabetAsNumbers.map((a) => a.toString(36).toLocaleUpperCase());
     }
   
     get symbols(): string[] {
