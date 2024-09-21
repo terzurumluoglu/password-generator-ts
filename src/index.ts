@@ -1,17 +1,18 @@
-import { IPasswordConfig } from './models/IPasswordConfig';
-import { Char, Utils } from './services';
+import { IPasswordConfig } from "./models/IPasswordConfig";
+import { Char, Utils } from "./services";
 import { PasswordError } from "./helpers/PasswordError";
-import { validation } from './helpers/validation';
+import { validation } from "./helpers/validation";
 
 const char = Char.get();
 const utils = Utils.get();
 
 const generatePassword = (length: number, config: IPasswordConfig) => {
-
   const control = validation({ length, config });
 
   if (!control.success) {
-    const { error: { code, message } } = control;
+    const {
+      error: { code, message },
+    } = control;
     throw new PasswordError(code, message);
   }
 
@@ -32,12 +33,14 @@ const generatePassword = (length: number, config: IPasswordConfig) => {
 
   if (len > 0) {
     utils.generateEmptyArray(len).forEach((_) => {
-      const index = utils.generateRandomNumber(arrayWithSelectedProperties.length);
+      const index = utils.generateRandomNumber(
+        arrayWithSelectedProperties.length
+      );
       passwordAsArray.push(arrayWithSelectedProperties[index]);
     });
   }
 
-  return utils.shuffle(passwordAsArray).join('');
+  return utils.shuffle(passwordAsArray).join("");
 };
 
 export { generatePassword, IPasswordConfig };

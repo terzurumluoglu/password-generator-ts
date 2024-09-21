@@ -1,9 +1,9 @@
 export interface IValidation {
-    success: boolean;
-    error?: IValidationError;
-};
+  success: boolean;
+  error?: IValidationError;
+}
 
 interface IValidationError {
-    code: string;
-    message: string;
-};
+  code: string;
+  message: string;
+}
