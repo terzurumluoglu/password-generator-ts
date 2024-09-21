@@ -27,7 +27,7 @@ const config: IPasswordConfig = {
 # returns generated password: 'wREzBnDk' or when error occured: 'at least 2 options must be selected' || 'at least 6 characters'
 let password = '';
 try {
-    password = generatePassword(8, config);
+    password = generatePassword(length, config);
 } catch (error: unknown) {
     password = (error as PasswordError).message; // when error occured.
 }
