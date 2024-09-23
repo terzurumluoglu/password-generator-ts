@@ -6,7 +6,22 @@ import { validation } from "./helpers/validation";
 const char = Char.get();
 const utils = Utils.get();
 
-const generatePassword = (length: number, config: IPasswordConfig) => {
+const generatePassword = (
+  length: number,
+  config: IPasswordConfig
+): {
+  password: string | undefined;
+  error: { code: string; message: string } | undefined;
+} => {
+  try {
+    const password = createPassword(length, config) as string;
+    return { password, error: undefined };
+  } catch (error: any) {
+    return { password: undefined, error };
+  }
+};
+
+const createPassword = (length: number, config: IPasswordConfig) => {
   const control = validation({ length, config });
 
   if (!control.success) {
@@ -43,4 +58,4 @@ const generatePassword = (length: number, config: IPasswordConfig) => {
   return utils.shuffle(passwordAsArray).join("");
 };
 
-export { generatePassword, IPasswordConfig, PasswordError };
+export { generatePassword, IPasswordConfig };

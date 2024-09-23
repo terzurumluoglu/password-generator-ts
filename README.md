@@ -24,12 +24,18 @@ const config: IPasswordConfig = {
     numbers: false         // for including numbers
 };
 
-# returns generated password: 'wREzBnDk' or when error occured: 'at least 2 options must be selected' || 'at least 6 characters'
-let password = '';
-try {
-    password = generatePassword(length, config);
-} catch (error: unknown) {
-    password = (error as PasswordError).message; // when error occured.
+# returns generated password: 'wREzBnDk'
+or when error occured: 'at least 2 options must be selected' || 'at least 6 characters'
+
+// If the process take an error, password will undefined and error will full with error code and message,
+// If the process copmleted succesfully error will undefined and password will full with generated password.
+
+const { error, password } = generatePassword(size, config);
+
+if(error) {
+    console.log(error.code, error.message)
+    return;
 }
+
 
 ```
