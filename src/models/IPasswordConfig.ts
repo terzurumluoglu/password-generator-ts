@@ -4,3 +4,12 @@ export interface IPasswordConfig {
   uppercases?: boolean;
   symbols?: boolean;
 }
+
+type PasswordConfigKeys = keyof IPasswordConfig;
+
+export const VALID_KEYS: (PasswordConfigKeys | string)[] = [
+  "numbers",
+  "lowercases",
+  "uppercases",
+  "symbols",
+];

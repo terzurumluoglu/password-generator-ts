@@ -1,4 +1,4 @@
-import { IPasswordConfig } from "../models/IPasswordConfig";
+import { IPasswordConfig, VALID_KEYS } from "../models/IPasswordConfig";
 
 export class Utils {
   static #instance: Utils;
@@ -19,6 +19,7 @@ export class Utils {
 
   getSelectedKeys(config: IPasswordConfig): string[] {
     return Object.entries(config)
+      .filter((ent) => VALID_KEYS.includes(ent[0]))
       .filter((ent) => ent[1])
       .map((ent) => ent[0]);
   }
