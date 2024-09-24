@@ -40,7 +40,7 @@ const createPassword = (length: number, config: IPasswordConfig) => {
   keys.forEach((key: string) => {
     const arr: string[] = char[key as keyof typeof char] as string[];
     arrayWithSelectedProperties.push(...arr);
-    const index = utils.generateRandomNumber(arr.length);
+    const index = utils.generateRandomNumber(arr.length - 1);
     passwordAsArray.push(arr[index]);
   });
 
@@ -49,7 +49,7 @@ const createPassword = (length: number, config: IPasswordConfig) => {
   if (len > 0) {
     utils.generateEmptyArray(len).forEach((_) => {
       const index = utils.generateRandomNumber(
-        arrayWithSelectedProperties.length
+        arrayWithSelectedProperties.length - 1
       );
       passwordAsArray.push(arrayWithSelectedProperties[index]);
     });
