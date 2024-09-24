@@ -1,6 +1,6 @@
 {
   "name": "password-generator-ts",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "You can geenrate random password by using your selection",
   "main": "build/index.js",
   "scripts": {
