@@ -1,49 +1,45 @@
-import { REQUIREMENT } from "../constants/requirement";
-import { IPasswordConfig } from "../models/IPasswordConfig";
-import { IValidation } from "../models/IValidation";
+import { REQUIREMENT } from "../constants";
+import { IPasswordConfig } from "../models";
 import { Utils } from "../services";
+import { PasswordError } from "./PasswordError";
 
 const utils: Utils = Utils.get();
 
 export const validation = (control: {
   length: number;
   config: IPasswordConfig;
-}): IValidation => {
+}): {
+  selectedConfigOptions: string[];
+} => {
   const { length, config } = control;
 
   if (length < REQUIREMENT.length.min) {
-    return {
-      success: false,
-      error: {
-        code: "length-min",
-        message: `at least ${REQUIREMENT.length.min} characters`,
-      },
+    const error = {
+      code: "length-min",
+      message: `at least ${REQUIREMENT.length.min} characters must be entered`,
     };
+    throw new PasswordError(error.code, error.message);
   }
 
   const selectedConfigOptions: string[] = utils.getSelectedKeys(config);
 
   if (selectedConfigOptions.length < REQUIREMENT.config.min) {
-    return {
-      success: false,
-      error: {
-        code: "options-min",
-        message: `at least ${REQUIREMENT.config.min} options must be selected`,
-      },
+    const error = {
+      code: "options-min",
+      message: `at least ${REQUIREMENT.config.min} options must be selected except noDuplicate`,
     };
+    throw new PasswordError(error.code, error.message);
   }
 
   if (selectedConfigOptions.length > REQUIREMENT.config.max) {
-    return {
-      success: false,
-      error: {
-        code: "max",
-        message: `at most ${REQUIREMENT.config.max} options must be selected`,
-      },
+    const error = {
+      code: "max",
+      message: `at most ${REQUIREMENT.config.max} options must be selected except noDuplicate`,
     };
+    throw new PasswordError(error.code, error.message);
   }
 
   return {
-    success: true,
+    selectedConfigOptions,
   };
 };

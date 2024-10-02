@@ -1,7 +1,6 @@
-import { IPasswordConfig } from "./models/IPasswordConfig";
+import { IPasswordConfig } from "./models";
 import { Char, Utils } from "./services";
-import { PasswordError } from "./helpers/PasswordError";
-import { validation } from "./helpers/validation";
+import { PasswordError, validation } from "./helpers";
 
 const char = Char.get();
 const utils = Utils.get();
@@ -21,30 +20,42 @@ const generatePassword = (
   }
 };
 
-const createPassword = (length: number, config: IPasswordConfig) => {
-  const control = validation({ length, config });
+const createPassword = (
+  length: number,
+  config: IPasswordConfig
+): string | PasswordError => {
+  // eslint-disable-next-line prefer-const
+  let { noDuplicate, ...others } = config;
 
-  if (!control.success) {
-    const {
-      error: { code, message },
-    } = control;
-    throw new PasswordError(code, message);
-  }
-
-  const keys = utils.getSelectedKeys(config);
+  const { selectedConfigOptions } = validation({ length, config: others });
 
   const passwordAsArray: string[] = [];
 
-  const arrayWithSelectedProperties: string[] = [];
+  let arrayWithSelectedProperties: string[] = selectedConfigOptions.reduce(
+    (acc: string[], key: string) => {
+      const arr: string[] = char[key as keyof typeof char] as string[];
+      const index = utils.generateRandomNumber(arr.length - 1);
+      passwordAsArray.push(arr[index]);
+      return [...acc, ...arr];
+    },
+    []
+  );
 
-  keys.forEach((key: string) => {
-    const arr: string[] = char[key as keyof typeof char] as string[];
-    arrayWithSelectedProperties.push(...arr);
-    const index = utils.generateRandomNumber(arr.length - 1);
-    passwordAsArray.push(arr[index]);
-  });
+  const len = length - selectedConfigOptions.length;
 
-  const len = length - keys.length;
+  if (noDuplicate) {
+    arrayWithSelectedProperties = arrayWithSelectedProperties.filter(
+      (a) => !passwordAsArray.includes(a)
+    );
+
+    if (len > arrayWithSelectedProperties.length) {
+      noDuplicate = false;
+      arrayWithSelectedProperties = [
+        ...arrayWithSelectedProperties,
+        ...passwordAsArray,
+      ];
+    }
+  }
 
   if (len > 0) {
     utils.generateEmptyArray(len).forEach((_) => {
@@ -52,6 +63,7 @@ const createPassword = (length: number, config: IPasswordConfig) => {
         arrayWithSelectedProperties.length - 1
       );
       passwordAsArray.push(arrayWithSelectedProperties[index]);
+      noDuplicate && arrayWithSelectedProperties.splice(index, 1);
     });
   }
 

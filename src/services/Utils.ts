@@ -1,4 +1,4 @@
-import { IPasswordConfig, VALID_KEYS } from "../models/IPasswordConfig";
+import { IPasswordConfig, VALID_KEYS } from "../models";
 
 export class Utils {
   static #instance: Utils;
