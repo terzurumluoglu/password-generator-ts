@@ -1,7 +1,7 @@
 {
   "name": "password-generator-ts",
   "version": "2.0.0",
-  "description": "You can geenrate random password by using your selection",
+  "description": "You can generate random password by using your selection",
   "main": "build/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
